@@ -16,15 +16,28 @@ class Dice:
 
 class Player:
 
-    def __init__(self, ishuman: bool):
+    def __init__(self, name: str, ishuman: bool):
+        self._name = name
         self.dice = Dice()
         self.counter = 10
         self.ishuman = ishuman
+
+    def __gt__(self, other):
+        return self.dice.value > other.dice.value
+
+    def __eq__(self, other):
+        return  self.dice.value == other.dice.value
+    @property
+    def name(self):
+        return self._name
 
     def increment_counter(self):
         self.counter += 1
 
     def decrement_counter(self):
-        self.counter -= 1
+        if self.counter <= 0:
+            raise ValueError("Decrementing zero number is not allowed")
+        else:
+            self.counter -= 1
 
 
