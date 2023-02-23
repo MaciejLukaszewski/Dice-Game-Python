@@ -1,3 +1,5 @@
+import shutil
+
 from .graphics import DICE_ART
 from .graphics import DIE_HEIGHT
 from .graphics import DIE_WIDTH
@@ -34,3 +36,11 @@ def display_dices_names(names: list[str], return_str=False):
         print(separator_str)
         print(name_str)
         print(separator_str)
+
+
+def display_winner():
+    pass
+
+
+def display_score():
+    pass
