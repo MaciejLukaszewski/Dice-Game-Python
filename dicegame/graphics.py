@@ -48,4 +48,4 @@ DIE_HEIGHT = len(DICE_ART[1])
 
 DIE_WIDTH = len(DICE_ART[1][0])
 
-DIE_FACE_SEPARATOR = "\t\t"
+DIE_FACE_SEPARATOR = "        "

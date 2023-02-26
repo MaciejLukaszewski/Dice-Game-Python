@@ -1,9 +1,9 @@
 from random import randint
 import os
-import shutil
 
 from .graphics import DIE_WIDTH
-from .display import display_dices, display_dices_names
+from .display import display_dices, display_dices_names, display_winner, display_score
+
 
 class Dice:
 
@@ -24,7 +24,7 @@ class Player:
     def __init__(self, name: str):
         self._name = name
         self._dice = Dice()
-        self._counter = 10
+        self._counter = 0
 
     def __gt__(self, other):
         return self.dice.value > other.dice.value
@@ -51,11 +51,8 @@ class Player:
     def increment_counter(self):
         self._counter += 1
 
-    def decrement_counter(self):
-        if self._counter <= 0:
-            raise ValueError("Value can't be less than zero")
-        else:
-            self._counter -= 1
+    def zero_counter(self):
+        self._counter = 0
 
 
 class DiceGame:
@@ -76,16 +73,15 @@ class DiceGame:
                 self._players.append(Player(name))
 
         self._round_num = 0
-        self.
 
     def play(self):
         os.system("cls")
         print("Welcome to the roll the dice game!")
         display_dices([1, 6])
-        input("\n\nPress any key to start the first round ...")
+        input("\n\nPress ENTER to start the first round ...")
         os.system("cls")
 
-        while not any(player.counter == 0 for player in self._players):
+        while not any(player.counter == 2 for player in self._players):
 
             for player in self._players:
                 player.dice.roll()
@@ -96,14 +92,27 @@ class DiceGame:
                 names.append(player.name)
                 results.append(player.dice.value)
 
-            self._players = sorted(self._players)
-            winner = self._players[-1]
+            max_roll = max(player.dice.value for player in self._players)
+            winners = []
+            losers = []
+            for player in self._players:
+                if player.dice.value == max_roll:
+                    winners.append(player)
+                else:
+                    losers.append(player)
+            if len(winners) == 1:
+                winners[0].increment_counter()
+            for loser in losers:
+                loser.zero_counter()
 
+            winner = winners[0]
             display_dices_names(names)
             display_dices(results)
             print()
-            print(f"\t\t{winner.name} WINS")
-
-            input("\n\nPress any key to start the next round ...")
+            display_winner(len(self._players), winner.name)
+            print()
+            display_score(self._players)
+            input("\n\nPress ENTER to start the next round ...")
             os.system('cls')
 
+        print("Game has ended")

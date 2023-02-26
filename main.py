@@ -1,8 +1,6 @@
 import os
 
-from dicegame import Dice, Player, DiceGame
-from dicegame import display_dices_names, display_dices
-from dicegame.graphics import DIE_WIDTH
+from dicegame import DiceGame
 
 
 def main():
@@ -20,7 +18,6 @@ def main():
     game = DiceGame(players_list)
     game.play()
     exit()
-        #for player.dice.value in players_list:
 
 
 if __name__ == "__main__":

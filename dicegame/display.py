@@ -1,10 +1,7 @@
-import shutil
-
 from .graphics import DICE_ART
 from .graphics import DIE_HEIGHT
 from .graphics import DIE_WIDTH
 from .graphics import DIE_FACE_SEPARATOR
-
 
 def display_dices(values: list[int]):
 
@@ -38,9 +35,18 @@ def display_dices_names(names: list[str], return_str=False):
         print(separator_str)
 
 
-def display_winner():
-    pass
+def display_winner(players_num: int, winner: str):
+
+    if not (isinstance(players_num, int) and isinstance(winner, str)):
+        raise TypeError()
+    free_space = (players_num * (DIE_WIDTH + len(DIE_FACE_SEPARATOR)) - len(DIE_FACE_SEPARATOR))
+    output = winner + " WINS!!"
+
+    print(output.center(int(free_space)))
 
 
-def display_score():
-    pass
+def display_score(players):
+    print("Score:")
+    for player in players:
+        print(f"{player.name}: {player.counter}")
+
