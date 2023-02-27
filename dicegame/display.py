@@ -3,6 +3,7 @@ from .graphics import DIE_HEIGHT
 from .graphics import DIE_WIDTH
 from .graphics import DIE_FACE_SEPARATOR
 
+
 def display_dices(values: list[int]):
 
     for row_number in range(DIE_HEIGHT):
@@ -43,10 +44,3 @@ def display_winner(players_num: int, winner: str):
     output = winner + " WINS!!"
 
     print(output.center(int(free_space)))
-
-
-def display_score(players):
-    print("Score:")
-    for player in players:
-        print(f"{player.name}: {player.counter}")
-
