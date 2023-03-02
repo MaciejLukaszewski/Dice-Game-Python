@@ -2,26 +2,57 @@ from random import randint
 import os
 
 from .graphics import DIE_WIDTH
-from .display import display_dices, display_dices_names, display_winner
+from .display import display_dices, display_dices_owners, display_winner
 
 
 class Dice:
+    """Class representing dice and it's behaviour
 
+    Attributes:
+        _value (int): value of the dice
+
+    Methods:
+        roll(self):
+            Return dice rolled value
+    """
     def __init__(self):
+        """Initialize an instance of Dice."""
         self._value = None
 
     @property
     def value(self):
+        """int: Return the value of dice"""
         return self._value
 
     def roll(self):
+        """Returns the rolled dice value
+
+        Returns:
+            Integer value from [1,6] space
+
+        """
         self._value = randint(1, 6)
         return self._value
 
 
 class Player:
+    """Class representing player
 
+        Attributes:
+            _name (str): name of the player
+            _dice (Dice): dice object assigned to the player
+            _counter (int): points scored through rounds
+
+        Methods:
+            increment_counter(self):
+                Increments '_counter' value by 1
+        """
     def __init__(self, name: str):
+        """Initialization of the Player class
+
+        Args:
+            name (str): Name of the player
+        """
         self._name = name
         self._dice = Dice()
         self._counter = 0
@@ -34,6 +65,7 @@ class Player:
 
     @property
     def name(self):
+        """Returns the name of the player"""
         return self._name
 
     @name.setter
@@ -42,22 +74,45 @@ class Player:
 
     @property
     def dice(self):
+        """Returns the dice object"""
         return self._dice
 
     @property
     def counter(self):
+        """Returns player counter"""
         return self._counter
 
     def increment_counter(self):
+        """Increments player winning rounds by 1"""
         self._counter += 1
 
 
 class DiceGame:
+    """Class representing Dice Game
+
+    Attributes:
+        _players (list[Player]): List containing all players participating in the game
+
+    Methods:
+        play(self):
+            Starts and manage the game
+    """
 
     WINNING_SCORE = 3
 
     def __init__(self, names: list[str]):
+        """Initialization of the DiceGame class
 
+        Args:
+            names (list[str]): List containing players names
+
+        Raises:
+            TypeError:
+                If 'names' value is not a list, or
+                If list elements are not a string
+            ValueError:
+                If string element of the list is too long
+        """
         if not isinstance(names, list):
             raise TypeError("List is expected type")
         else:
@@ -72,7 +127,14 @@ class DiceGame:
                 self._players.append(Player(name))
 
     def play(self):
+        """Manages the process of the game
+
+        Game last till one, or more players scores enough points after the round.
+        WINNING_SCORE defines number of score needed to win.
+        """
+
         os.system("cls")
+
         print("Welcome to the roll the dice game!")
         display_dices([1, 6])
         input("\n\nPress ENTER to start the first round ...")
@@ -100,7 +162,7 @@ class DiceGame:
                 winner = winners[0].name
             else:
                 winner = " and ".join(winner.name for winner in winners)
-            display_dices_names(names)
+            display_dices_owners(names)
             display_dices(results)
             print()
             display_winner(len(self._players), winner)

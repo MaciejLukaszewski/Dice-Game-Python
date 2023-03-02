@@ -1,17 +1,12 @@
 General Requirements
-    ● The game should have two players: a human player and a computer player. Both should
-    have the same functionality.
-    ● Both players will start with a counter of 10.
     ● Each player will have a particular die during the entire game.
-    ● Both players will roll their corresponding die (once per round).
+    ● Each player will roll their corresponding die (once per round).
     ● The values of the dice will be compared to determine who wins the round. The player
     with the highest value wins the round.
-    ● If the two values are equal, then there is a tie and there is no winner for that round. The
-    counters are not modified.
-    ● The counter of the player who wins a round will be decremented by 1.
-    ● The counter of the player who loses a round will be incremented by 1.
+    ● If the values are equal, then there is a tie and tied players wins
+    ● The counter of the player who wins a round will be incremented by 1.
     ● The counter will determine who wins the game. The player whose counter reaches the
-    value 0 first wins the game.
+    set value first wins the game.
 
 Specific Requirements
     ○ Before the human player rolls the die, he/she should be prompted to press any
@@ -44,9 +39,8 @@ Die
 Player
     ● Each player should have the following attributes:
         ➤ A Die instance.
-        ➤ A Boolean value (True/False) to indicate if the player is a human or the computer.
-        ➤ A counter. The initial value should be 10.
+        ➤ A counter. The initial value should be 0.
+        ➤ A name
     ● Each player should be able to:
         ➤ Increment the value of the counter by 1.
-        ➤ Decrement the value of the counter by 1.
         ➤ Roll the die
