@@ -7,7 +7,7 @@ def main():
 
     player_human = "MadWrath"
     player_human_2 = "LittleP"
-    player_pc = "PC"
+    player_pc = "UnicCor"
 
     players_list = [
                     player_human,
