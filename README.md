@@ -1,4 +1,4 @@
-# Dice-Game-Python
+# Dice-Game-Python 2022
 Simple dice game where each player rolls the dice and highest score wins
 
 Rules:
